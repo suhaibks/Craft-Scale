@@ -1,10 +1,10 @@
 /**
- * Craft&Scale Client Application Logic (Root Level)
+ * Craft&Scale - Client Application Logic
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   // -----------------------------------------------------------
-  // 1. Dynamic Year Update
+  // 1. Dynamic Footer Year
   // -----------------------------------------------------------
   const yearEl = document.getElementById('year');
   if (yearEl) {
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenuBtn.setAttribute('aria-expanded', 'false');
     };
 
+    // Toggle menu click
     mobileMenuBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
@@ -41,12 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Close when clicking any nav link
     mobileLinks.forEach((link) => {
       link.addEventListener('click', () => {
         closeMenu();
       });
     });
 
+    // Close when clicking outside of navbar
     document.addEventListener('click', (e) => {
       if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
         closeMenu();
@@ -57,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // -----------------------------------------------------------
   // 3. EmailJS Form Dispatcher
   // -----------------------------------------------------------
+  // Replace these with your active EmailJS credentials when ready:
   const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
   const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
   const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
@@ -77,14 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'Sending...';
       formFeedback.className = 'hidden';
 
-      // Fallback Demo Mode if keys haven't been set yet
+      // Fallback demo mode if keys are not configured yet
       if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
         setTimeout(() => {
-          formFeedback.textContent = 'Demo Mode: Form submitted! To receive real emails, add your EmailJS credentials in main.js.';
+          formFeedback.textContent = 'Demo Mode: Form submitted! To receive real emails, configure your EmailJS keys in main.js.';
           formFeedback.className = 'rounded-md p-3 text-xs font-medium bg-emerald-50 text-emerald-700 block';
           contactForm.reset();
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Message';
+          submitBtn.textContent = 'Send Request';
         }, 800);
         return;
       }
@@ -93,17 +97,17 @@ document.addEventListener('DOMContentLoaded', () => {
       emailjs
         .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this)
         .then(() => {
-          formFeedback.textContent = 'Thank you! Your message has been sent. We will get back to you within 24 hours.';
+          formFeedback.textContent = 'Thank you! Your request has been received. We will call or message you shortly.';
           formFeedback.className = 'rounded-md p-3 text-xs font-medium bg-emerald-50 text-emerald-700 block';
           contactForm.reset();
         })
         .catch(() => {
-          formFeedback.textContent = 'Something went wrong. Please connect with us directly via WhatsApp or email.';
+          formFeedback.textContent = 'Something went wrong. Please connect directly via WhatsApp or Phone.';
           formFeedback.className = 'rounded-md p-3 text-xs font-medium bg-red-50 text-red-700 block';
         })
         .finally(() => {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Message';
+          submitBtn.textContent = 'Send Request';
         });
     });
   }
