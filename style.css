@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Craft&Scale - Core Agency Stylesheet (Root Level)
+   Craft&Scale - Core Stylesheet
    ========================================================================== */
 
 /* Base Typography */
@@ -7,7 +7,7 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Subtle Interactive Card Transition */
+/* Subtle Interactive Card Transitions */
 .card-hover {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
@@ -18,7 +18,7 @@ body {
   border-color: #cbd5e1;
 }
 
-/* Accessible focus styling */
+/* Accessible Focus Ring Styling */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
